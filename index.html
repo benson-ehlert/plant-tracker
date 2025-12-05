@@ -1,1 +1,372 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plant Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .app-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .plant-form label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .plant-form input[type="text"],
+    .plant-form input[type="file"] {
+      width: 100%;
+      font-size: 14px;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #2f855a;
+      color: white;
+      margin-right: 6px;
+      margin-top: 6px;
+    }
+
+    .btn.secondary {
+      background: #4a5568;
+    }
+
+    .btn.danger {
+      background: #c53030;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+    }
+
+    .plants-empty {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      padding: 24px 0 6px;
+    }
+
+    .plant-list {
+      margin-top: 16px;
+    }
+
+    .plant-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .plant-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
+      background: #e2e8f0;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .plant-info {
+      flex: 1;
+    }
+
+    .meta-row {
+      font-size: 13px;
+      margin: 2px 0;
+      color: #444;
+    }
+
+    .meta-label {
+      font-weight: 500;
+    }
+
+    .date-small {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .plant-actions {
+      margin-top: 6px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #777;
+      margin-top: -4px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <h1>Plant Tracker</h1>
+
+    <!-- Add Plant Card -->
+    <div class="card">
+      <div class="section-title">Add a plant</div>
+      <form id="plant-form" class="plant-form">
+        <label for="plant-name">Name</label>
+        <input id="plant-name" type="text" placeholder="e.g. Fiddle leaf fig" required />
+
+        <label for="plant-photo">Photo (optional)</label>
+        <input id="plant-photo" type="file" accept="image/*" />
+
+        <button type="submit" class="btn">Add plant</button>
+      </form>
+      <div class="hint">
+        Tip: After you add your plants, tap "Watered today" or "Fertilized today" when you care for them.
+      </div>
+    </div>
+
+    <!-- Plant List -->
+    <div id="plant-list" class="plant-list"></div>
+  </div>
+
+  <script>
+    // Local storage key
+    const STORAGE_KEY = "plantTrackerDataV1";
+
+    // Cached state
+    let plants = [];
+
+    function loadPlants() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        plants = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error("Failed to load plants", e);
+        plants = [];
+      }
+    }
+
+    function savePlants() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+    }
+
+    function createId() {
+      return "plant-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    }
+
+    function daysSince(dateString) {
+      if (!dateString) return null;
+      const today = new Date();
+      const date = new Date(dateString);
+      const diffMs = today.setHours(0,0,0,0) - date.setHours(0,0,0,0);
+      const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    function formatDateShort(dateString) {
+      if (!dateString) return "Never";
+      const d = new Date(dateString);
+      if (isNaN(d.getTime())) return "Unknown";
+      const options = { month: "short", day: "numeric" };
+      return d.toLocaleDateString(undefined, options);
+    }
+
+    function renderPlants() {
+      const container = document.getElementById("plant-list");
+      container.innerHTML = "";
+
+      if (!plants.length) {
+        const empty = document.createElement("div");
+        empty.className = "card plants-empty";
+        empty.textContent = "No plants yet. Add your first one above.";
+        container.appendChild(empty);
+        return;
+      }
+
+      plants.forEach(plant => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const row = document.createElement("div");
+        row.className = "plant-card";
+
+        // Image
+        const img = document.createElement("img");
+        img.className = "plant-photo";
+        if (plant.photoDataUrl) {
+          img.src = plant.photoDataUrl;
+        } else {
+          img.alt = "No photo";
+        }
+
+        // Info
+        const info = document.createElement("div");
+        info.className = "plant-info";
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = plant.name || "Unnamed plant";
+
+        const daysWater = daysSince(plant.lastWatered);
+        const daysFert = daysSince(plant.lastFertilized);
+
+        const waterRow = document.createElement("div");
+        waterRow.className = "meta-row";
+        waterRow.innerHTML =
+          '<span class="meta-label">Water:</span> ' +
+          (plant.lastWatered
+            ? (daysWater === 0
+                ? "Today"
+                : daysWater === 1
+                  ? "1 day ago"
+                  : daysWater + " days ago")
+            : "Never") +
+          ' <span class="date-small">(Last: ' + formatDateShort(plant.lastWatered) + ")</span>";
+
+        const fertRow = document.createElement("div");
+        fertRow.className = "meta-row";
+        fertRow.innerHTML =
+          '<span class="meta-label">Fertilizer:</span> ' +
+          (plant.lastFertilized
+            ? (daysFert === 0
+                ? "Today"
+                : daysFert === 1
+                  ? "1 day ago"
+                  : daysFert + " days ago")
+            : "Never") +
+          ' <span class="date-small">(Last: ' + formatDateShort(plant.lastFertilized) + ")</span>";
+
+        const actions = document.createElement("div");
+        actions.className = "plant-actions";
+
+        const waterBtn = document.createElement("button");
+        waterBtn.className = "btn secondary";
+        waterBtn.textContent = "Watered today";
+        waterBtn.onclick = () => {
+          plant.lastWatered = new Date().toISOString();
+          savePlants();
+          renderPlants();
+        };
+
+        const fertBtn = document.createElement("button");
+        fertBtn.className = "btn secondary";
+        fertBtn.textContent = "Fertilized today";
+        fertBtn.onclick = () => {
+          plant.lastFertilized = new Date().toISOString();
+          savePlants();
+          renderPlants();
+        };
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "btn danger";
+        deleteBtn.textContent = "Delete";
+        deleteBtn.onclick = () => {
+          if (confirm("Delete this plant?")) {
+            plants = plants.filter(p => p.id !== plant.id);
+            savePlants();
+            renderPlants();
+          }
+        };
+
+        actions.appendChild(waterBtn);
+        actions.appendChild(fertBtn);
+        actions.appendChild(deleteBtn);
+
+        info.appendChild(title);
+        info.appendChild(waterRow);
+        info.appendChild(fertRow);
+        info.appendChild(actions);
+
+        row.appendChild(img);
+        row.appendChild(info);
+        card.appendChild(row);
+        container.appendChild(card);
+      });
+    }
+
+    function handleAddPlant(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById("plant-name");
+      const photoInput = document.getElementById("plant-photo");
+      const name = nameInput.value.trim();
+      if (!name) {
+        alert("Please enter a name for your plant.");
+        return;
+      }
+
+      const file = photoInput.files[0];
+
+      const addPlantObject = (photoDataUrl) => {
+        const plant = {
+          id: createId(),
+          name,
+          photoDataUrl: photoDataUrl || null,
+          lastWatered: null,
+          lastFertilized: null
+        };
+        plants.push(plant);
+        savePlants();
+        renderPlants();
+        // reset form
+        nameInput.value = "";
+        photoInput.value = "";
+      };
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          addPlantObject(reader.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        addPlantObject(null);
+      }
+    }
+
+    document.getElementById("plant-form").addEventListener("submit", handleAddPlant);
+
+    // Initialize
+    loadPlants();
+    renderPlants();
+  </script>
+</body>
+</html>
