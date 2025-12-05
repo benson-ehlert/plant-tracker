@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Plant Tracker&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #f5f5f5;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.app-container {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 700px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-title {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-form label {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-form input[type="text"],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-form input[type="file"] {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #ccc;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #2f855a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-right: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn.secondary {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #4a5568;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn.danger {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #c53030;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn:active {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0.8;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plants-empty {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #666;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 24px 0 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-list {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-card {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-photo {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 72px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 72px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #e2e8f0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>object-fit: cover;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-info {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.meta-row {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 2px 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #444;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.meta-label {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.date-small {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #777;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.plant-actions {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.section-title {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hint {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #777;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: -4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="app-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Plant Tracker&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Add Plant Card --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="section-title"&gt;Add a plant&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;form id="plant-form" class="plant-form"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="plant-name"&gt;Name&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input id="plant-name" type="text" placeholder="e.g. Fiddle leaf fig" required /&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="plant-photo"&gt;Photo (optional)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input id="plant-photo" type="file" accept="image/*" /&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="submit" class="btn"&gt;Add plant&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hint"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Tip: After you add your plants, tap "Watered today" or "Fertilized today" when you care for them.</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Plant List --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="plant-list" class="plant-list"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Local storage key</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const STORAGE_KEY = "plantTrackerDataV1";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Cached state</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let plants = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function loadPlants() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const raw = localStorage.getItem(STORAGE_KEY);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plants = raw ? JSON.parse(raw) : [];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} catch (e) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>console.error("Failed to load plants", e);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plants = [];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function savePlants() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function createId() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return "plant-" + Math.random().toString(36).slice(2) + Date.now().toString(36);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function daysSince(dateString) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!dateString) return null;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const today = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const date = new Date(dateString);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const diffMs = today.setHours(0,0,0,0) - date.setHours(0,0,0,0);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return diffDays;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function formatDateShort(dateString) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!dateString) return "Never";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const d = new Date(dateString);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (isNaN(d.getTime())) return "Unknown";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const options = { month: "short", day: "numeric" };</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return d.toLocaleDateString(undefined, options);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderPlants() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const container = document.getElementById("plant-list");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>container.innerHTML = "";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!plants.length) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const empty = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>empty.className = "card plants-empty";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>empty.textContent = "No plants yet. Add your first one above.";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.appendChild(empty);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>plants.forEach(plant =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const card = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.className = "card";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const row = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.className = "plant-card";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Image</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const img = document.createElement("img");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>img.className = "plant-photo";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (plant.photoDataUrl) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>img.src = plant.photoDataUrl;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>img.alt = "No photo";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Info</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const info = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>info.className = "plant-info";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const title = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>title.className = "card-title";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>title.textContent = plant.name || "Unnamed plant";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const daysWater = daysSince(plant.lastWatered);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const daysFert = daysSince(plant.lastFertilized);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const waterRow = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>waterRow.className = "meta-row";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>waterRow.innerHTML =</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'&lt;span class="meta-label"&gt;Water:&lt;/span&gt; ' +</p>
+<p class="p1"><span class="Apple-converted-space">          </span>(plant.lastWatered</p>
+<p class="p1"><span class="Apple-converted-space">            </span>? (daysWater === 0</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? "Today"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: daysWater === 1</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>? "1 day ago"</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>: daysWater + " days ago")</p>
+<p class="p1"><span class="Apple-converted-space">            </span>: "Never") +</p>
+<p class="p1"><span class="Apple-converted-space">          </span>' &lt;span class="date-small"&gt;(Last: ' + formatDateShort(plant.lastWatered) + ")&lt;/span&gt;";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const fertRow = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fertRow.className = "meta-row";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fertRow.innerHTML =</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'&lt;span class="meta-label"&gt;Fertilizer:&lt;/span&gt; ' +</p>
+<p class="p1"><span class="Apple-converted-space">          </span>(plant.lastFertilized</p>
+<p class="p1"><span class="Apple-converted-space">            </span>? (daysFert === 0</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? "Today"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: daysFert === 1</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>? "1 day ago"</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>: daysFert + " days ago")</p>
+<p class="p1"><span class="Apple-converted-space">            </span>: "Never") +</p>
+<p class="p1"><span class="Apple-converted-space">          </span>' &lt;span class="date-small"&gt;(Last: ' + formatDateShort(plant.lastFertilized) + ")&lt;/span&gt;";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const actions = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions.className = "plant-actions";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const waterBtn = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>waterBtn.className = "btn secondary";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>waterBtn.textContent = "Watered today";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>waterBtn.onclick = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>plant.lastWatered = new Date().toISOString();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>savePlants();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>renderPlants();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const fertBtn = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fertBtn.className = "btn secondary";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fertBtn.textContent = "Fertilized today";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fertBtn.onclick = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>plant.lastFertilized = new Date().toISOString();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>savePlants();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>renderPlants();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const deleteBtn = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>deleteBtn.className = "btn danger";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>deleteBtn.textContent = "Delete";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>deleteBtn.onclick = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (confirm("Delete this plant?")) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>plants = plants.filter(p =&gt; p.id !== plant.id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>savePlants();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderPlants();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions.appendChild(waterBtn);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions.appendChild(fertBtn);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actions.appendChild(deleteBtn);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>info.appendChild(title);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>info.appendChild(waterRow);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>info.appendChild(fertRow);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>info.appendChild(actions);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.appendChild(img);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>row.appendChild(info);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.appendChild(row);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>container.appendChild(card);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function handleAddPlant(event) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const nameInput = document.getElementById("plant-name");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const photoInput = document.getElementById("plant-photo");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const name = nameInput.value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!name) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>alert("Please enter a name for your plant.");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const file = photoInput.files[0];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const addPlantObject = (photoDataUrl) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const plant = {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>id: createId(),</p>
+<p class="p1"><span class="Apple-converted-space">          </span>name,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>photoDataUrl: photoDataUrl || null,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>lastWatered: null,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>lastFertilized: null</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plants.push(plant);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>savePlants();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderPlants();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// reset form</p>
+<p class="p1"><span class="Apple-converted-space">        </span>nameInput.value = "";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>photoInput.value = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (file) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const reader = new FileReader();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>reader.onload = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>addPlantObject(reader.result);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>reader.readAsDataURL(file);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>addPlantObject(null);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("plant-form").addEventListener("submit", handleAddPlant);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Initialize</p>
+<p class="p1"><span class="Apple-converted-space">    </span>loadPlants();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderPlants();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
